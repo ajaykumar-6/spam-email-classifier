@@ -28,15 +28,26 @@ function toggleTheme() {
 
 // Text utils
 function updateCharCount() {
-    dom.charCount.innerText = `${dom.textArea.value.length} characters`;
+    const len = dom.textArea.value.length;
+    dom.charCount.innerText = `${len} characters`;
+
+    // ✅ HIDE ERROR WHEN USER TYPES
+    if (len > 0) {
+        dom.errorMsg.classList.add("hidden");
+    }
 }
 
 async function pasteText() {
-    const text = await navigator.clipboard.readText();
-    dom.textArea.value = text;
-    updateCharCount();
+    try {
+        const text = await navigator.clipboard.readText();
+        dom.textArea.value = text;
+        updateCharCount();
+        dom.errorMsg.classList.add("hidden"); // ✅ add
+        dom.textArea.focus();
+    } catch (err) {
+        showError("Failed to read clipboard permission.");
+    }
 }
-
 function clearText() {
     dom.textArea.value = "";
     updateCharCount();
@@ -70,6 +81,7 @@ async function predictSpam() {
 }
 
 function displayResult(data) {
+    dom.errorMsg.classList.add("hidden");
     dom.result.classList.remove("hidden");
     dom.result.className = "result-container";
 
