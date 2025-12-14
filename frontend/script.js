@@ -53,7 +53,7 @@ async function predictSpam() {
     dom.barFill.style.width = "0%";
 
     try {
-        const response = await fetch("/api/predict", {
+        const response = await fetch("https://spam-email-classifier-ibt6.onrender.com/predict", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email_text: text })
