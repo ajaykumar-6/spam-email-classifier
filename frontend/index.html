@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Email Spam Detective</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body data-theme="light">
+    <div class="app-container">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+
+      <div class="card">
+        <header>
+          <div class="header-content">
+            <h1><i class="fa-solid fa-shield-halved"></i> SpamCheck.ai</h1>
+            <p>Advanced Machine Learning Detection</p>
+          </div>
+          <button id="toggleTheme" class="theme-btn">
+            <i class="fa-solid fa-moon"></i>
+          </button>
+        </header>
+
+        <main>
+          <div class="input-group">
+            <div class="textarea-controls">
+              <label>Email Content</label>
+              <div class="actions">
+                <button onclick="pasteText()" class="text-btn">
+                  <i class="fa-regular fa-clipboard"></i> Paste
+                </button>
+                <button onclick="clearText()" class="text-btn">
+                  <i class="fa-solid fa-eraser"></i> Clear
+                </button>
+              </div>
+            </div>
+
+            <textarea
+              id="emailText"
+              placeholder="Paste the suspicious email content here..."
+            ></textarea>
+
+            <div class="char-count">0 characters</div>
+          </div>
+
+          <button id="predictBtn" onclick="predictSpam()">
+            <span class="btn-text">Analyze Email</span>
+            <span class="loader hidden"></span>
+          </button>
+
+          <div id="error-msg" class="error-msg hidden">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <span></span>
+          </div>
+        </main>
+
+        <div id="result" class="result-container hidden">
+          <div class="result-header">
+            <div id="statusIcon" class="status-icon"></div>
+            <div class="status-text">
+              <h2 id="predictionLabel"></h2>
+              <p id="confidenceText"></p>
+            </div>
+          </div>
+
+          <div class="progress-wrapper">
+            <div class="progress-bar">
+              <div id="barFill"></div>
+            </div>
+            <span id="percentageLabel">0%</span>
+          </div>
+        </div>
+
+        <footer>
+          <p>Powered by FastAPI & Machine Learning</p>
+        </footer>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
